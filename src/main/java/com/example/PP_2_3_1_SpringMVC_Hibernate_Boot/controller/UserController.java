@@ -33,6 +33,13 @@ public class UserController {
     }
 
     //поиск пользователя по id из DAO и передаем на представление
+    /*
+     @GetMapping(value = "/show_single_user")
+    public String showSingleUser (@RequestParam(value = "id") Long id, Model model) {
+        model.addAttribute("user", userService.getSingleUserById(id));
+        return "pages/show_user";
+    }
+     */
     @GetMapping("user/{id}")
     public String show(@PathVariable("id") int id, Model model) {
         model.addAttribute("user", userService.getSingleUserById(id));
@@ -74,8 +81,8 @@ public class UserController {
         }
     }
 
-    @DeleteMapping("user/{id}")
-    public String delete(@PathVariable("id") int id) {
+    @GetMapping(value = "/delete_user")
+    public String deleteUser(@RequestParam(value = "id") int id, Model model) {
         userService.delete(id);
         return "redirect:/";
     }
